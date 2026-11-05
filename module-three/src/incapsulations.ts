@@ -25,5 +25,5 @@ const employee = new Employee("Tusher", 6000);
 
 employee.baseSalary = 3000
 
-console.log(employee.salaryWithBonous);
+//console.log(employee.salaryWithBonous);
 
