@@ -12,5 +12,5 @@ class Employee{
 const employee = new Employee("Tusher", 2000);
 const employee2 = new Employee("Rahim", 3400);
 
-console.log(employee);
-console.log(employee2)
+// console.log(employee);
+// console.log(employee2)
