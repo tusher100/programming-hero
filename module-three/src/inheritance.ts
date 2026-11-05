@@ -1,7 +1,8 @@
 class Employee {
   constructor(
     public name: string,
-    private _baseSalary: number,
+   // private _baseSalary: number,
+   protected _baseSalary: number,
   ) {}
 
   get baseSalary(): number {
@@ -25,16 +26,27 @@ class Employee {
 }
 
 class Manager extends Employee {
-  teamMemberCount: number;
-
-  constructor(name: string, _baseSalary: number, teamMemberCount: number) {
+  constructor(
+    name: string,
+    _baseSalary: number,
+    public teamMemberCount: number,
+  ) {
     super(name, _baseSalary);
-    this.teamMemberCount = teamMemberCount;
   }
+
+
+describeWork(): string {
+    return `${this.name} manage ${this.teamMemberCount} people`
+}
+
+describeManager(): string {
+    return `${this.name} earn ${this._baseSalary}`
+}
 }
 
 const employee = new Employee("Tusher", 6000);
-const manager = new Manager("karim", 2000, 20);
+const manager = new Manager("karim", 6000, 20);
 employee.baseSalary = 3000;
 
-//console.log(manager);
+
+console.log(manager.describeManager());
