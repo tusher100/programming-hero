@@ -49,4 +49,4 @@ const manager = new Manager("karim", 6000, 20);
 employee.baseSalary = 3000;
 
 
-console.log(manager.describeManager());
+//console.log(manager.describeManager());
