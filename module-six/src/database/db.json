@@ -1,17 +1,1 @@
-[
-    {
-        "id": 2,
-        "name": "banana",
-        "price": 60
-    },
-    {
-        "id": 1794653587516,
-        "name": "iphone",
-        "price": 60
-    },
-    {
-        "id": 3,
-        "name": "banana",
-        "price": 60
-    }
-]
+[{"id":1794653587516,"name":"iphone","price":60},{"id":3,"name":"banana","price":60},{"id":1794658823777,"name":"owl","price":20}]
