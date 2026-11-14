@@ -1,1 +1,27 @@
-[{"id":1,"name":"apple","price":40},{"id":2,"name":"banana","price":60},{"id":1794653587516,"name":"cherry","price":200}]
+[
+    {
+        "id": 2,
+        "name": "banana",
+        "price": 60
+    },
+    {
+        "id": 1,
+        "name": "orange",
+        "price": 60
+    },
+    {
+        "id": 1794653587516,
+        "name": "iphone",
+        "price": 60
+    },
+    {
+        "id": 1794655743330,
+        "name": "banana",
+        "price": 60
+    },
+    {
+        "id": 3,
+        "name": "banana",
+        "price": 60
+    }
+]

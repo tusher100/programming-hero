@@ -50,6 +50,32 @@ const ProductController = async (req: IncomingMessage, res: ServerResponse) => {
         data: newProducts,
       }),
     );
+  } else if (method === "PUT" && id !== null){
+    const body = await bodyParser(req);
+    const products = productService();
+   const index = products.findIndex((p: Iproducts) => p.id === id);
+    console.log(index)
+   if(index < 0){
+     res.writeHead(404, { "content-type": "application/json" });
+    res.end(
+      JSON.stringify({
+        message: "Product not found",
+       // data: newProducts,
+      }),
+    );
+   }
+   products[index] = {id: products[index].id, ...body};
+   createProducts(products)
+
+
+     res.writeHead(200, { "content-type": "application/json" });
+    res.end(
+      JSON.stringify({
+        message: "Product updated successfully",
+        data: products[index],
+      }),
+    );
+
   }
 };
 
