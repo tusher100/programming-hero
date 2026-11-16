@@ -6,3 +6,4 @@ npm install -D @types/node
 npm i tsx
 npm i dotenv
 npm install express
+npm i @types/pg
