@@ -83,6 +83,13 @@ app.get("/api/v1/users", async (req: Request, res: Response) => {
             
             `);
 
+                if(result.rowCount === 0){
+        res.status(404).json({
+      success: false,
+      message: "User not found",
+    //   data: result.rows[0],
+    });}
+
     // console.log(result);
     res.status(200).json({
       success: true,
@@ -108,6 +115,13 @@ app.get("/api/v1/users/:id", async (req: Request, res: Response) => {
             `,
       [id],
     );
+
+        if(result.rowCount === 0){
+        res.status(404).json({
+      success: false,
+      message: "User not found",
+    //   data: result.rows[0],
+    });}
     res.status(200).json({
       success: true,
       message: "User retrive successfully",
@@ -139,6 +153,14 @@ app.put("/api/v1/users/:id", async (req: Request, res: Response) => {
             `,
       [name ?? null, password ?? null, age ?? null, is_Active ?? null, id],
     );
+
+       if(result.rowCount === 0){
+        res.status(404).json({
+      success: false,
+      message: "User not found",
+    //   data: result.rows[0],
+    });}
+    
     res.status(200).json({
       success: true,
       message: "User updated successfully",
@@ -152,6 +174,41 @@ app.put("/api/v1/users/:id", async (req: Request, res: Response) => {
     });
   }
 });
+
+app.delete("/api/v1/users/:id", async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const result = await pool.query(
+      `
+          DELETE FROM users
+         WHERE id = $1;
+            
+            `,
+      [id],
+    );
+
+    if(result.rowCount === 0){
+        res.status(404).json({
+      success: false,
+      message: "User not found",
+    //   data: result.rows[0],
+    });
+
+    }
+    res.status(200).json({
+      success: true,
+      message: "User deleted successfully",
+    //   data: result.rows[0],
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error?.message,
+      error: error,
+    });
+  }
+});
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
