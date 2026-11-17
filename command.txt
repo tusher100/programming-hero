@@ -1,9 +1,11 @@
 cd '.\module six\'
 npm init -y
 npm i -D typescript
+npm install -D tsx
 npx tsc --init
 npm install -D @types/node
 npm i tsx
 npm i dotenv
 npm install express
 npm i @types/pg
+ "dev": "tsx watch ./src/server.ts",
