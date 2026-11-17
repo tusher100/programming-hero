@@ -12,6 +12,21 @@ const pool = new Pool({
 
 const initDB = async() => {
   try {
+
+    await pool.query(`
+
+      CREATE TABLE IF NOT EXISTS students(
+      id SERIAL PRIMARY KEY,
+      name VARCHAR(255),
+      email VARCHAR(255) UNIQUE NOT NULL,
+      age INT,
+      is_Active BOOLEAN DEFAULT true,
+      created_at TIMESTAMP DEFAULT NOW(),
+      updated_at TIMESTAMP DEFAULT NOW()
+      
+      )
+      
+      `)
     console.log("Database connected succussfully")
     
   } catch (error) {
