@@ -4,6 +4,7 @@ import express, {
   type Response,
 } from "express";
 import { pool } from "./db";
+import { userRoute } from "./modules/users/user.route";
 const app: Application = express();
 
 
@@ -24,31 +25,9 @@ app.get("/", (req: Request, res: Response) => {
   });
 });
 
-app.post("/api/v1/users", async (req: Request, res: Response) => {
-  try {
-    const { name, email, password, age } = req.body;
+app.use("/api/v1/users", userRoute);
 
-    const result = await pool.query(
-      `
-    INSERT INTO users (name, email, password, age) VALUES ($1, $2, $3, $4) RETURNING *
-    `,
-      [name, email, password, age],
-    );
-    //console.log(password)
 
-    res.status(201).json({
-      success: true,
-      message: "User added successfully",
-      data: result.rows[0],
-    });
-  } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      message: error?.message,
-      error: error,
-    });
-  }
-});
 
 app.get("/api/v1/users", async (req: Request, res: Response) => {
   try {
