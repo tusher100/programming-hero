@@ -28,6 +28,8 @@ const auth = async (req: Request, res: Response, next: NextFunction) => {
       message: "forbidden",
     });
   }
+
+  req.user = decode;
   next();
 };
 
