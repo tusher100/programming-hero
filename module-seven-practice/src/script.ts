@@ -23,7 +23,7 @@ const initDB = async () => {
       name VARCHAR(255),
       email VARCHAR(255) UNIQUE NOT NULL,
       age INT,
-      is_Active BOOLEAN DEFAULT true,
+      is_active BOOLEAN DEFAULT true,
       created_at TIMESTAMP DEFAULT NOW(),
       updated_at TIMESTAMP DEFAULT NOW()
       

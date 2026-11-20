@@ -3,11 +3,12 @@ export interface IUser{
     email: string,
     password: string,
     age?: number | null,
+    role?: string
 }
 
 export interface Ipartial{
     name?: string | null,
     password?: string | null,
     age?: string | null,
-    is_Active?: string | null,
+    is_active?: string | null,
 }

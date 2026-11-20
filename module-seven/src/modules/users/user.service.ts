@@ -3,14 +3,14 @@ import { pool } from "../../db";
 import type { Ipartial, IUser } from "./user.interface";
 
 const createUserIntoDB = async (payLoad: IUser) => {
-  const { name, email, password, age } = payLoad;
+  const { name, email, password, age, role } = payLoad;
   const hashPassword = await bcrypt.hash(password, 10)
 
   const result = await pool.query(
     `
-    INSERT INTO users (name, email, password, age) VALUES ($1, $2, $3, $4) RETURNING *
+    INSERT INTO users (name, email, password, age, role) VALUES ($1, $2, $3, $4, COALESCE($5, 'user')) RETURNING *
     `,
-    [name, email, hashPassword, age],
+    [name, email, hashPassword, age, role],
   );
 
   delete result.rows[0].password
@@ -40,7 +40,7 @@ const getSingleUserFromDB = async (id: string) => {
 };
 
 const updateUserFromDB = async (payload: Ipartial, id: string) => {
-  const { name, password, age, is_Active } = payload;
+  const { name, password, age, is_active } = payload;
   const result = await pool.query(
     `
             UPDATE users
@@ -48,11 +48,11 @@ const updateUserFromDB = async (payload: Ipartial, id: string) => {
             name = COALESCE($1, name),
             password = COALESCE($2, password),
             age = COALESCE($3, age),
-            is_Active = COALESCE($4, is_Active),
+            is_active = COALESCE($4, is_active),
             updated_at = NOW()
             WHERE id=$5 RETURNING *
             `,
-    [name ?? null, password ?? null, age ?? null, is_Active ?? null, id],
+    [name ?? null, password ?? null, age ?? null, is_active ?? null, id],
   );
 
   return result;
