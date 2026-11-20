@@ -1,0 +1,2 @@
+Method: POST | URL: /api/v1/auth/login | Time: 1795147654789
+Method: GET | URL: /api/v1/users | Time: 1795147723328
