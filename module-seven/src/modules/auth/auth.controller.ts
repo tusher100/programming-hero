@@ -1,29 +1,35 @@
-import { type Request, type Response } from 'express';
-import { authService } from './auth.service';
+import { type Request, type Response } from "express";
+import { authService } from "./auth.service";
 
+const loginUser = async (req: Request, res: Response) => {
+  try {
+    const result = await authService.loginUserIntoDB(req.body);
 
-const loginUser = async (req: Request, res: Response) =>{
+    const {refreshToken} = result;
 
-    try {
+    res.cookie("refreshToken", refreshToken, {
+      secure: false, //http -> false, https -> true /in production -> true
+      httpOnly: true, //prevent xss attack
+      sameSite: "lax", //none, strict, lax //prevent CSRF attack
+      //maxAge
+      path: "/",
+      domain: "localhost" //example.com
+    })
 
-        const result = await authService.loginUserIntoDB(req.body)
-
-        res.status(200).json({
+    res.status(200).json({
       success: true,
       message: "user login successfully",
       data: result,
     });
-        
-    } catch (error: any) {
+  } catch (error: any) {
     res.status(500).json({
       success: false,
       message: error?.message,
       error: error,
     });
   }
-
-}
+};
 
 export const authController = {
-    loginUser,
-}
+  loginUser,
+};
